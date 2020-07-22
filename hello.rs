@@ -3,7 +3,7 @@ fn main(){
     let env_args= env::args();
 
     let args:Vec<String> = env_args.collect();
-    let first_arg = &args[2];
+    let first_arg = &args[1];
 
     if first_arg == "1" {
         println!("Hello world");
