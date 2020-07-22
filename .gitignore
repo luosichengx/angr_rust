@@ -5,3 +5,4 @@ test/
 *.ll
 *.log
 my_lang_start/target
+hello
