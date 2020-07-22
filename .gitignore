@@ -1,1 +1,7 @@
 rust_procedures/__pycache__/
+.vscode
+test/
+*.so
+*.ll
+*.log
+my_lang_start/target
