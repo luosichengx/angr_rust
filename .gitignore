@@ -4,5 +4,6 @@ test/
 *.so
 *.ll
 *.log
+*.txt
 my_lang_start/target
 hello
