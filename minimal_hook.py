@@ -40,7 +40,7 @@ def setAngrLogger(level, need_file_handler):
 
 if __name__ == "__main__":
     proj = angr.Project("rust_example/minimal_hook")
-    #setAngrLogger(logging.DEBUG, False)
+    setAngrLogger(logging.DEBUG, False)
     #proj.hook_symbol('_ZN3std2rt10lang_start17hf3c239e75c0091e5E', lang_start())
     #proj.hook_symbol('_ZN3std2rt10lang_start17ha0e013fbbe2d5e95E', lang_start())
     #proj.hook_symbol('_ZN3std3env4args17h3d221e79ea653f05E', std_env_args())
