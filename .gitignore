@@ -7,3 +7,5 @@ test/
 *.txt
 my_lang_start/target
 hello
+__pycache__/
+src/__pycache__/

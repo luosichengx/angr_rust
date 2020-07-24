@@ -53,6 +53,13 @@ pub fn rust_init(argc: isize, argv: *const *const u8){
 }
 
 #[no_mangle]
+pub fn rust_cleanup() {
+    unsafe{
+        rust_imp::cleanup();
+    }
+}
+
+#[no_mangle]
 pub fn add_one_test(argc: isize, argv: *const *const u8) -> isize{
     argc + 1
 }
@@ -63,9 +70,7 @@ pub fn mock_my_lang_start(
     argc: isize,
     argv: *const *const u8
 ) -> isize{
-    unsafe{
-        rust_init(argc, argv);
-    }
+    rust_init(argc, argv);
     main();
     0
 }
