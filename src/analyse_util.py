@@ -74,13 +74,13 @@ def run_hello(filename):
     setAngrLogger(logging.INFO, False)
     proj = angr.Project(filename, force_load_libs = rust_forced_load_libs)
     #lang_start
-    proj.hook_symbol('_ZN3std2rt10lang_start17ha0e013fbbe2d5e95E', lang_start())
+    proj.hook_symbol('_ZN3std2rt10lang_start17h760a4ca434027e2bE', lang_start())
     #std::env::args()
-    proj.hook_symbol('_ZN3std3env4args17h3d221e79ea653f05E', std_env_args())
+    proj.hook_symbol('_ZN3std3env4args17h5c13af50c07c618eE', std_env_args())
     #print
-    proj.hook_symbol('_ZN3std2io5stdio6_print17h67d3962635b60ab5E', angr.SIM_PROCEDURES['libc']['printf']())
+    proj.hook_symbol('_ZN3std2io5stdio6_print17h29b5732a3c8e3feeE', angr.SIM_PROCEDURES['libc']['printf']())
     #panic
-    proj.hook_symbol('_ZN3std9panicking11begin_panic17h650ba46693a559d5E', rust_panic())
+    proj.hook_symbol('_ZN3std9panicking11begin_panic17hbb16b07720ab8b7cE', rust_panic())
     sym_argc = claripy.BVS("sym_argc", 64)
     state = proj.factory.entry_state(argc = sym_argc, args = [proj.filename, "1", "2", "3"])
     #print(state.posix.argc)
