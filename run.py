@@ -34,4 +34,4 @@ def add_rust_support(p):
         # p.hook_symbol('_ZN6string13_$LT$impl$GT$9to_string9to_string21h12836934065809422381E', to_string())
         # p.hook_symbol('_ZN9panicking9panic_fmt20h4c8d12e3c05f3b8cZEKE', angr.SIM_PROCEDURES['stubs']['ReturnUnconstrained']())
 
-run_symexe("rust_example/what_it_looks_like")
+run_symexe("old_rust_example/what_it_looks_like")

@@ -71,7 +71,7 @@ def setAngrLogger(level, need_file_handler, logfilename = angr_log_file):
         angr_logger.addHandler(fileHandler)
 
 def run_hello(filename):
-    setAngrLogger(logging.DEBUG, False)
+    setAngrLogger(logging.INFO, False)
     proj = angr.Project(filename, force_load_libs = rust_forced_load_libs)
     #lang_start
     proj.hook_symbol('_ZN3std2rt10lang_start17ha0e013fbbe2d5e95E', lang_start())
@@ -98,7 +98,7 @@ def run_hello(filename):
         
 
 if __name__ == "__main__":
-    filename = "../rust_example/hello"
+    filename = "../old_rust_example/hello"
     begin_time = time.time()
     run_hello(filename)
     end_time = time.time()
