@@ -3,6 +3,7 @@ import angr
 import claripy
 import logging
 import time
+import re
 
 current_log_file = "../log/run_util.log"
 angr_log_file = "../log/angr_run_util.log"
@@ -15,6 +16,12 @@ logger.addHandler(fh)
 rust_forced_load_libs = ["libmy_rust_std.so"]
 
 class rust_util:
+    ###function name
+    std_rt_lang_start = "std::rt::lang_start"
+    std_env_args = "std::env::args"
+    std_io_stdio__print = "std::io::stdio::_print"
+    std_panicking_begin_panic = "std::panicking::begin_panic"
+
     @staticmethod
     def get_function_sao(proj, state, shared_lib_name, function_name):
         shared_lib_object = proj.loader.shared_objects.get(shared_lib_name)
@@ -22,6 +29,56 @@ class rust_util:
         logger.debug("fucntion addr : 0x%x" % function_addr)
         function_bv = state.solver.BVV(function_addr, 64)
         return angr.state_plugins.sim_action_object.SimActionObject(function_bv)
+
+    #objdump出来的地址需要为16位
+    @staticmethod
+    def get_all_symbols(filename, function_name):
+        if not filename.endswith(".txt"):
+            raise Exception("Invalid file type")
+        res = set()
+        with open(filename, "r") as fp:
+            contents = fp.readlines()
+            fp.close()
+            function_symbols = function_name.split("::")
+            #print(function_symbols)
+            for line in contents:
+                line = line.strip()
+                #contain rust function name
+                contain_all_flag = True
+                for function_symbol in function_symbols:
+                    if not line.__contains__(function_symbol):
+                        contain_all_flag = False
+                        break
+                if not contain_all_flag:
+                    continue
+                #find function def pattern
+                line_pattern = r'^([0-9]|[a-f]){16}\s+'
+                function_name_pattern = r'<_ZN'
+                for symbol in function_symbols:
+                    function_name_pattern = function_name_pattern + r'\d+'
+                    function_name_pattern = function_name_pattern + symbol
+                function_name_pattern = function_name_pattern + r'([0-9]|[a-z]|[A-Z])+>'
+                #print(function_name_pattern)
+
+                if re.search(line_pattern, line) != None:
+                    search_function_name_obj = re.search(function_name_pattern, line)
+                    if search_function_name_obj != None:
+                        #print(search_function_name_obj.span())
+                        begin_index, end_index = search_function_name_obj.span()
+                        one_res = line[begin_index+1:end_index-1]
+                        #print(one_res)
+                        res.add(one_res)
+            return res
+
+    @staticmethod
+    def get_one_symbol(filename,function_name):
+        all_symbols = list(rust_util.get_all_symbols(filename, function_name))
+        if len(all_symbols) < 1:
+            raise Exception("No symbol was found.")
+        elif len(all_symbols) > 1:
+            raise Exception("More than one symbol was found. Please call get_all_symbols.")
+        else:
+            return all_symbols[0]
 
 
 class lang_start(angr.SimProcedure):
@@ -73,14 +130,20 @@ def setAngrLogger(level, need_file_handler, logfilename = angr_log_file):
 def run_hello(filename):
     setAngrLogger(logging.INFO, False)
     proj = angr.Project(filename, force_load_libs = rust_forced_load_libs)
-    #lang_start
-    proj.hook_symbol('_ZN3std2rt10lang_start17h760a4ca434027e2bE', lang_start())
+    disassembly_filename = filename + ".txt"
+    #std::rt::lang_start
+    lang_start_symbol = rust_util.get_one_symbol(disassembly_filename,rust_util.std_rt_lang_start)
+    proj.hook_symbol(lang_start_symbol, lang_start())
     #std::env::args()
-    proj.hook_symbol('_ZN3std3env4args17h5c13af50c07c618eE', std_env_args())
+    env_args_symbol = rust_util.get_one_symbol(disassembly_filename,rust_util.std_env_args)
+    proj.hook_symbol(env_args_symbol, std_env_args())
     #print
-    proj.hook_symbol('_ZN3std2io5stdio6_print17h29b5732a3c8e3feeE', angr.SIM_PROCEDURES['libc']['printf']())
+    print_symbol = rust_util.get_one_symbol(disassembly_filename,rust_util.std_io_stdio__print)
+    proj.hook_symbol(print_symbol, angr.SIM_PROCEDURES['libc']['printf']())
     #panic
-    proj.hook_symbol('_ZN3std9panicking11begin_panic17hbb16b07720ab8b7cE', rust_panic())
+    panic_symbol = rust_util.get_one_symbol(disassembly_filename,rust_util.std_panicking_begin_panic)
+    proj.hook_symbol(panic_symbol, rust_panic())
+    #set argc symbolic
     sym_argc = claripy.BVS("sym_argc", 64)
     state = proj.factory.entry_state(argc = sym_argc, args = [proj.filename, "1", "2", "3"])
     #print(state.posix.argc)

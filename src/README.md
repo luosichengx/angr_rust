@@ -7,12 +7,15 @@
 |`analyse_minimal_hook.py`|*|进行中|-|测试最小hook内容|
 |`analyse_api_collections_hashmap.py`|*|进行中|-|hashmap|
 |`analyse_api_getopts.py`|*|**已完成**|60|读取命令行参数|
-|`analyse_api_rand.py`|*|***无结果***|60|rand;调用外部crate|
+|`analyse_api_rand.py`|*|***无结果***|4|rand;调用外部crate|
 |`analyse_api_std_from_str.py`|*|***已完成***|7|字符串转数字|
 |`analyse_what_it_looks_like.py`|*|***无结果***|9|线程、闭包|
 |`analyse_what_it_looks_like2.py`|*|**已完成**|6|match语法|
-|`analyse_what_it_looks_like3.py`|*|**已完成**|-|unicode字符|
-
+|`analyse_what_it_looks_like3.py`|*|**已完成**|7|unicode字符|
+#### 下表中是跳过的文件  
+|文件名|说明|跳过原因|
+|:-:|:-:|:-:|
+|`api-std-fs-file`|读取文件内容|编译出来的binary无法跑通|
 
 
 
