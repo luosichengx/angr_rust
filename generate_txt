@@ -1,0 +1,14 @@
+#!/bin/bash
+
+RUST_BINARY_PATH="rust-examples/build/"
+files=$(ls $RUST_BINARY_PATH)
+invalid_file_type=".txt"
+except_list="fibonacci date"
+for filename in $files
+do
+    if [[ $filename != *$invalid_file_type && !($except_list =~ $filename) ]]
+    then
+        #echo $filename
+        objdump -d ${RUST_BINARY_PATH}${filename} > ${RUST_BINARY_PATH}${filename}$invalid_file_type
+    fi
+done
