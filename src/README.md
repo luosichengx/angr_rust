@@ -4,7 +4,7 @@
 #### 下表中是测试的完成情况：  
 |文件名|二进制文件|进行状况|运行时间(s)|说明|
 |:-:|:-:|:-:|:-:|:-:|
-|`analyse_hello.py`|hello|**<font color=Blue>已完成</font>**|18|环境变量的初始化与读取|
+|`analyse_hello.py`|*|**<font color=Blue>已完成</font>**|18|环境变量的初始化与读取|
 |`analyse_minimal_hook.py`|*|进行中|-|测试最小hook内容|
 |`analyse.py`|api-collections-hashmap|***<font color=Green>跑不完</font>***|-|hashmap|
 |`analyse_api_getopts.py`|*|**<font color=Blue>已完成</font>**|60|读取命令行参数|
@@ -17,6 +17,19 @@
 |`analyse.py`|design_pattern-chain_of_command|**<font color=Blue>已完成</font>**|8|trait;Box访问堆|
 |`analyse.py`|design_pattern-command|**<font color=Blue>已完成</font>**|5|Box;生命周期|
 |`analyse.py`|design_pattern-decorator|**<font color=Blue>已完成</font>**|42|trait;输出格式|
+|`analyse.py`|design_pattern-decorator2|**<font color=Blue>已完成</font>**|13|Box;输出格式|
+|`analyse.py`|design_pattern-observer|**<font color=Blue>已完成</font>**|10|生命周期;trait|
+|`analyse.py`|design_pattern-strategy|**<font color=Blue>已完成</font>**|5|trait|
+|`analyse.py`|design_pattern-templatemethod|**<font color=Blue>已完成</font>**|14|trait;cmp|
+|`analyse.py`|design_pattern-visitor|**<font color=Blue>已完成</font>**|10|trait;范型|
+|`analyse.py`|find_max|**<font color=Blue>已完成</font>**|9|trait;范型;闭包;数组|
+|`analyse.py`|lang-generics|**<font color=Blue>已完成</font>**|5|trait;结构体|
+|`analyse.py`|lang-interface|**<font color=Blue>已完成</font>**|10|trait;结构体;范型|
+|`analyse.py`|lang-lambda|**<font color=Blue>已完成</font>**|4|操作符重载|
+|`analyse.py`|lang-overloading|**<font color=Blue>已完成</font>**|5|闭包|
+|`analyse.py`|lang-pointers|**<font color=Blue>已完成</font>**|9|解引用操作符|
+|`analyse.py`|linked_list|**<font color=Blue>已完成</font>**|6|链表|
+|`analyse.py`|phantom_type|**<font color=Blue>已完成</font>**|6|PhantomData（幽灵数据）|
 |`analyse.py`|what_it_looks_like|***<font color=Red>无结果</font>***|9|线程、闭包|
 |`analyse.py`|what_it_looks_like2|**<font color=Blue>已完成</font>**|7|match语法|
 |`analyse.py`|what_it_looks_like3|**<font color=Blue>已完成</font>**|8|unicode字符|
@@ -26,7 +39,7 @@
 |`api-std-fs-file`|读取文件内容|编译出来的binary无法跑通|
 |`fibonacci`|测试模块|objdump遇到无法识别的文件格式|
 |`date`|测试模块|objdump遇到无法识别的文件格式|
-
+|`lang-question_mark`|读取文件内容|编译出来的binary无法跑通|
 
 
 

@@ -20,6 +20,7 @@ def run(filename):
     for panic_symbol in panic_symbols:
         proj.hook_symbol(panic_symbol, rust_panic())
     
+    #需要标准输入
     state = proj.factory.entry_state(stdin=angr.SimFile)
     simgr = proj.factory.simulation_manager(state)
     simgr.run()
