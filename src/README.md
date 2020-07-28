@@ -1,22 +1,25 @@
 ## **代码文件**
-由于每个二进制中的函数签名不同，需要单独进行hook, 对于每一个rust-examples中的二进制文件，都有一个对应的`analyse_*.py`  
++ 对于大部分rust-examples/build中的文件，修改`analyse.py`中的binary_file为对应的文件名即可
++ 有些文件hook的函数不同，需要单独进行hook, 对于每一个这样的二进制文件，都有一个对应的`analyse_*.py`  
 #### 下表中是测试的完成情况：  
 |文件名|二进制文件|进行状况|运行时间(s)|说明|
 |:-:|:-:|:-:|:-:|:-:|
 |`analyse_hello.py`|hello|**<font color=Blue>已完成</font>**|18|环境变量的初始化与读取|
 |`analyse_minimal_hook.py`|*|进行中|-|测试最小hook内容|
-|`analyse_api_collections_hashmap.py`|*|***<font color=Green>跑不完</font>***|-|hashmap|
+|`analyse.py`|api-collections-hashmap|***<font color=Green>跑不完</font>***|-|hashmap|
 |`analyse_api_getopts.py`|*|**<font color=Blue>已完成</font>**|60|读取命令行参数|
 |`analyse_api_rand.py`|*|***<font color=Red>无结果</font>***|4|rand;调用外部crate|
 |`analyse_api_std_from_str.py`|*|**<font color=Blue>已完成</font>**|7|字符串转数字|
-|`analyse_api_std_vec.py`|*|***<font color=Blue>已完成</font>**|17|数组|
+|`analyse.py`|api_std_vec|***<font color=Blue>已完成</font>**|18|数组|
 |`analyse_gueseeing_game.py`|*|***<font color=Red>无结果</font>***|17|标准输入|
-|`analyse_dining_philosophers.py`|*|**<font color=Blue>已完成</font>**|11|结构体|
-|`analyse_threads.py`|*|***<font color=Red>无结果</font>***|-|线程|
-|`analyse_chain_of_commands.py`|*|**<font color=Blue>已完成</font>**|-|trait;Box访问堆|
-|`analyse_what_it_looks_like.py`|*|***<font color=Green>跑不完</font>***|9|线程、闭包|
-|`analyse_what_it_looks_like2.py`|*|**<font color=Blue>已完成</font>**|6|match语法|
-|`analyse_what_it_looks_like3.py`|*|**<font color=Blue>已完成</font>**|7|unicode字符|
+|`analyse.py`|book-3_2-dining_philosophers|**<font color=Blue>已完成</font>**|11|结构体|
+|`analyse.py`|book-5_6-threads|***<font color=Red>无结果</font>***|-|线程|
+|`analyse.py`|design_pattern-chain_of_command|**<font color=Blue>已完成</font>**|8|trait;Box访问堆|
+|`analyse.py`|design_pattern-command|**<font color=Blue>已完成</font>**|5|Box;生命周期|
+|`analyse.py`|design_pattern-decorator|**<font color=Blue>已完成</font>**|42|trait;输出格式|
+|`analyse.py`|what_it_looks_like|***<font color=Red>无结果</font>***|9|线程、闭包|
+|`analyse.py`|what_it_looks_like2|**<font color=Blue>已完成</font>**|7|match语法|
+|`analyse.py`|what_it_looks_like3|**<font color=Blue>已完成</font>**|8|unicode字符|
 #### 下表中是跳过的文件  
 |文件名|说明|跳过原因|
 |:-:|:-:|:-:|

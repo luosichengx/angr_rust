@@ -3,6 +3,7 @@ import angr
 import logging
 import time
 from analyse_util import *
+import os
 
 def run(filename):
     proj = angr.Project(filename, force_load_libs = rust_forced_load_libs)
@@ -15,8 +16,10 @@ def run(filename):
     print_symbol = rust_util.get_one_symbol(disassembly_filename, rust_util.std_io_stdio__print)
     proj.hook_symbol(print_symbol, angr.SIM_PROCEDURES['libc']['printf']())
     #panic
-    panic_symbol = rust_util.get_one_symbol(disassembly_filename, rust_util.std_panicking_begin_panic)
-    proj.hook_symbol(panic_symbol, rust_panic())
+    #可能存在多个panic的签名
+    panic_symbols = rust_util.get_all_symbols(disassembly_filename, rust_util.std_panicking_begin_panic)
+    for panic_symbol in panic_symbols:
+        proj.hook_symbol(panic_symbol, rust_panic())
     
     state = proj.factory.entry_state()
     simgr = proj.factory.simulation_manager(state)
@@ -24,7 +27,10 @@ def run(filename):
     print(simgr.deadended)
         
 if __name__ == "__main__":
-    filename = "../rust-examples/build/design_pattern-chain_of_command"
+    directory_name = "../rust-examples/build/"
+    binary_file = "book-5_6-threads"
+    filename = os.path.join(directory_name, binary_file)
+    print(filename)
     begin_time = time.time()
     run(filename)
     end_time = time.time()
