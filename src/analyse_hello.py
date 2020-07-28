@@ -3,7 +3,6 @@ import angr
 import claripy
 import logging
 import time
-import re
 from analyse_util import *
 
 def run_hello(filename):
