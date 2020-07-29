@@ -1,6 +1,7 @@
 RUST_EXAMPLE_PATH=old_rust_example
 RUST_BINARY_PATH=rust-examples/build
 SRC_PATH=src
+OLD_RUST_EXAMPLE_PATH=old_rust_example/
 
 .PHONY: all hello minimal_hook clean shared_lib txt clean_all
 all: shared_lib txt
@@ -15,7 +16,9 @@ minimal_hook: ${RUST_EXAMPLE_PATH}/minimal_hook.rs
 clean:
 	rm ${RUST_BINARY_PATH}/*.txt
 	rm ${SRC_PATH}/*.so
+	rm ${OLD_RUST_EXAMPLE_PATH}/*.txt
 clean_all:
 	rm ${RUST_BINARY_PATH}/*.txt
 	rm ${RUST_EXAMPLE_PATH}/*.ll
 	rm ${RUST_EXAMPLE_PATH}/*.txt
+	rm ${OLD_RUST_EXAMPLE_PATH}/*.txt
