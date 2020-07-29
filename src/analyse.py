@@ -28,7 +28,7 @@ def run(filename):
         
 if __name__ == "__main__":
     directory_name = "../rust-examples/build/"
-    binary_file = "phantom_type"
+    binary_file = "tutorial-tasks-02_3-arc"
     filename = os.path.join(directory_name, binary_file)
     print(filename)
     begin_time = time.time()
