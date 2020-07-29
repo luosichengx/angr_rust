@@ -10,7 +10,7 @@
 |`analyse_api_getopts.py`|*|**<font color=Blue>已完成</font>**|60|读取命令行参数|
 |`analyse_api_rand.py`|*|***<font color=Red>无结果</font>***|4|rand;调用外部crate|
 |`analyse_api_std_from_str.py`|*|**<font color=Blue>已完成</font>**|7|字符串转数字|
-|`analyse.py`|api_std_vec|***<font color=Blue>已完成</font>**|18|数组|
+|`analyse.py`|api_std_vec|**<font color=Blue>已完成</font>**|18|数组|
 |`analyse_gueseeing_game.py`|*|***<font color=Red>无结果</font>***|17|标准输入|
 |`analyse.py`|book-3_2-dining_philosophers|**<font color=Blue>已完成</font>**|11|结构体|
 |`analyse.py`|book-5_6-threads|***<font color=Red>无结果</font>***|-|线程|
