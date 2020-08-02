@@ -1,6 +1,5 @@
 rust_procedures/__pycache__/
 .vscode
-test/
 *.so
 *.ll
 *.log

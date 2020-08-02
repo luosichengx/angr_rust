@@ -28,8 +28,9 @@ def run(filename):
         
 if __name__ == "__main__":
     directory_name = "../rust-examples/build/"
-    binary_file = "tutorial-tasks-02_3-arc"
+    binary_file = "api-collections-hashmap"
     filename = os.path.join(directory_name, binary_file)
+    filename = "../test/api-collections-hashmap"
     print(filename)
     begin_time = time.time()
     run(filename)
