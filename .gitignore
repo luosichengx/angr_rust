@@ -4,7 +4,7 @@ rust_procedures/__pycache__/
 *.ll
 *.log
 *.txt
-my_lang_start/target
+rust_shared_lib/*/target
 __pycache__/
 src/__pycache__/
 rust-examples/data
