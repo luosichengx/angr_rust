@@ -3,6 +3,8 @@ import angr
 import logging
 import re
 
+from claripy.ast.bool import true
+
 current_log_file = "../log/run_util.log"
 angr_log_file = "../log/angr_run_util.log"
 
@@ -124,6 +126,23 @@ def setAngrLogger(level, need_file_handler, logfilename = angr_log_file):
         fileHandler = logging.FileHandler(logfilename, mode='w', encoding="utf-8", delay=False)
         fileHandler.setFormatter(logging.Formatter('%(levelname)-7s | %(asctime)-23s | %(name)-8s | %(message)s'))
         angr_logger.addHandler(fileHandler)
+
+#默认忽视不可见字符
+#value:字符串编码后对应的整数
+#nbytes:字符串的字节数
+def pass_int_to_ascii_string(value, nbytes, ignore_control_symbol = True):
+    mask = 0xff
+    res = []
+    for _ in range(nbytes):
+        least_byte = value & mask
+        #32是空格符，忽略32以下的字符
+        if ignore_control_symbol and least_byte >= 32:
+            res.append(chr(least_byte))
+        value = value >> 8
+    res.reverse()
+    return "".join(res)
+
+
 
    
 

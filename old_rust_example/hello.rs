@@ -5,7 +5,7 @@ fn main(){
     let args:Vec<String> = env_args.collect();
     let first_arg = &args[1];
 
-    if first_arg == "1" {
+    if first_arg == "a" {
         println!("Hello world");
     }else {
         println!("First arg is not 1");

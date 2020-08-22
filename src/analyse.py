@@ -7,7 +7,7 @@ import os
 
 def run(filename):
     proj = angr.Project(filename, force_load_libs = rust_forced_load_libs)
-    setAngrLogger(logging.INFO, False)
+    setAngrLogger(logging.INFO, True)
     disassembly_filename = filename + ".txt"
     #lang_start
     lang_start_symbol = rust_util.get_one_symbol(disassembly_filename,rust_util.std_rt_lang_start)
@@ -30,7 +30,10 @@ if __name__ == "__main__":
     directory_name = "../rust-examples/build/"
     binary_file = "api-collections-hashmap"
     filename = os.path.join(directory_name, binary_file)
+
+    #for test
     filename = "../test/api-collections-hashmap"
+    
     print(filename)
     begin_time = time.time()
     run(filename)
